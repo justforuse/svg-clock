@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script src="jquery.js"></script>
+	<style>
+	* {
+		padding: 0;
+		margin: 0;
+	}
+	
+	svg {
+		width: 100%;
+		height: 700px;
+	}
+	</style>
+</head>
+
+<body>
+	<svg>
+		<defs>
+			<filter id="shadow">
+				<feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"></feGaussianBlur>
+				<feOffset in="blur" dx="8" dy="7" result="offsetBlur"></feOffset>
+				<feMerge>
+					<feMergeNode in="offsetBlur"></feMergeNode>
+					<feMergeNode in="SourceGraphic"></feMergeNode>
+				</feMerge>
+			</filter>
+			<polygon></polygon>
+		</defs>
+		<g filter="url(#shadow)">
+			<!-- outer circle -->
+			<circle cx="200" cy="200" r="150" fill="none" stroke="black" stroke-width="2"></circle>
+			<!-- dot -->
+			<circle cx="200" cy="200" r="5"></circle>
+			<!-- hour -->
+			<rect id="hour" x="198" y="115" width="4" height="100" transform="rotate(30 200 200)"></rect>
+			<!-- minute -->
+			<rect id="minute" x="198" y="85" width="3" height="130"></rect>
+			<!-- second -->
+			<rect id="second" x="199" y="65" width="2" height="150"></rect>
+		</g>
+	</svg>
+	<script>
+		var i = 0;
+		function rotateHour(){
+			$("#hour").attr("transform",function(index, value){
+				console.log("here");
+				return "rotate(" + (i++) + " 200 200)";
+			})
+		}
+		function rotateMinute(){
+			$("#hour").attr("transform",function(index, value){
+				console.log("here");
+				return "rotate(" + (i++) + " 200 200)";
+			})
+		}
+		function rotateSecond(){
+			$("#hour").attr("transform",function(index, value){
+				console.log("here");
+				return "rotate(" + (6*i++) + " 200 200)";
+			})
+		}
+		setInterval("rotateHour()", 1000)
+		setInterval("rotateSecond()", 1000)
+	</script>
+</body>
+
+</html>
